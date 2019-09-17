@@ -62,4 +62,3 @@ object precioDolar {
 	method esComida() { return false }
 	method esElectrodomestico() { return false }
 }
-	}
