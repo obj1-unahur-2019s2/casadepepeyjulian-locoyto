@@ -62,3 +62,21 @@ object precioDolar {
 	method esComida() { return false }
 	method esElectrodomestico() { return false }
 }
+
+object packComida {
+	var property plato = null
+	var property aderezo = null
+	method precio() { return plato.precio() + aderezo.precio() }
+	method esComida() { return true }
+	method esElectrodomestico() { return false }
+}
+
+object packRegalo {
+	var property lista = []	
+	method agregarRegalo (nuevoRegalo) { lista.add { nuevoRegalo }}
+	method precio() { return lista.sum { n => n.precio() } * 0.8 }
+	method esComida() { return lista.all { n => n.esComida() } }
+	method esElectrodomestico() { return lista.any { n => n.esElectrodomestico() } 
+	}
+}
+

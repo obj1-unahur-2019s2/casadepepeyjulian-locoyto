@@ -1,10 +1,10 @@
 import cosas.* 
 
 object casaDePepeYJulian {
-	var cosas = [paqueteDeFideos, heladera]
+	const property cosas = []
 	
 	method comprar (cosa) {
-		cosas.add { cosa }
+		cosas.add ( cosa )
 	}
 	
 	method cantidadDeCosasCompradas() {
@@ -12,7 +12,7 @@ object casaDePepeYJulian {
 	}
 	
 	method tieneComida() {
-		return cosas.any { a=> a.esComida() }
+		return cosas.any { a => a.esComida() }
 	}
 	
 	method vieneDeEquiparse() {
@@ -29,11 +29,11 @@ object casaDePepeYJulian {
 	}
 	
 	method electrodomesticosComprados() {
-		cosas.filter { n => n.esElectrodomestico()}
+		return cosas.filter { n => n.esElectrodomestico()}
 	}
 	
 	method malaEpoca() {
-		cosas.all { n => n.esComida()}
+		return cosas.all { n => n.esComida()}
 		}
 		
 	method queFaltaComprar(lista) {
@@ -41,9 +41,26 @@ object casaDePepeYJulian {
 	}
 	
 	method faltaComida() {
-		return cosas.count { n => n.esComida()} >= 2
+		return cosas.count { n => n.esComida()  } >= 2
+	}
+	
+	method gastoEnComida() {
+		return  cosas.filter{ n => n.esComida() }.sum { n => n.precio()}
+	}
+	
+	method hayElectrodomesticosBaratos() {
+		return self.electrodomesticosComprados().any { n =>  n.precio() < 3000}
+	}	
+	
+	method preciosDeElectrodomesticos() {
+		return self.electrodomesticosComprados().map { n => n.precio()}
+	}
+	
+	method nivelEnAumento() {
+		return cosas.last().precio() >=  cosas.first().precio() * 2
+	}
+	
+	method primeraComidaComprada() {
+		return cosas.find { n => n.esComida() }
 	}
 }
-
-
-	
